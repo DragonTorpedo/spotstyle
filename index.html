@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SpotStyle — Founder Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg:       #09090E;
+    --bg1:      #0F0F18;
+    --bg2:      #14141F;
+    --border:   rgba(255,255,255,0.07);
+    --gold:     #C8A96E;
+    --gold-dim: rgba(200,169,110,0.10);
+    --gold-bd:  rgba(200,169,110,0.22);
+    --text1:    #F0EDE6;
+    --text2:    #8A8680;
+    --text3:    #45434A;
+    --green:    #6EBF8B;
+    --blue:     #6E9FBF;
+    --amber:    #BF9B6E;
+    --red:      #BF6E6E;
+    --font-d:   'Playfair Display', Georgia, serif;
+    --font-b:   'DM Sans', system-ui, sans-serif;
+    --font-m:   'DM Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text1);
+    font-family: var(--font-b);
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  a { color: var(--gold); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ── LAYOUT ── */
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2rem 6rem;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    padding: 3.5rem 0 3rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3.5rem;
+    position: relative;
+  }
+  .site-header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; left: 0; right: 60%;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    opacity: 0.5;
+  }
+  .header-eyebrow {
+    font-family: var(--font-m);
+    font-size: 0.58rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.75;
+    margin-bottom: 0.9rem;
+  }
+  .header-title {
+    font-family: var(--font-d);
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin-bottom: 0.5rem;
+  }
+  .header-title em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gold);
+  }
+  .header-tagline {
+    font-size: 1rem;
+    color: var(--text2);
+    font-weight: 300;
+    margin-top: 0.75rem;
+    font-style: italic;
+  }
+  .header-meta {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .meta-pill {
+    font-family: var(--font-m);
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text3);
+    border: 1px solid var(--border);
+    padding: 0.3rem 0.75rem;
+    border-radius: 2px;
+  }
+
+  /* ── TOC ── */
+  .toc {
+    background: var(--bg1);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--gold-bd);
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 3.5rem;
+    border-radius: 2px;
+  }
+  .toc-label {
+    font-family: var(--font-m);
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 0.9rem;
+  }
+  .toc-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.35rem 2rem;
+  }
+  .toc-list li a {
+    font-size: 0.82rem;
+    color: var(--text2);
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .toc-list li a::before {
+    content: '→';
+    color: var(--gold);
+    opacity: 0.5;
+    font-size: 0.7rem;
+  }
+  .toc-list li a:hover { color: var(--text1); text-decoration: none; }
+
+  /* ── SECTION ── */
+  .section {
+    margin-bottom: 4rem;
+    scroll-margin-top: 2rem;
+  }
+  .section-eyebrow {
+    font-family: var(--font-m);
+    font-size: 0.55rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.7;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .section-eyebrow::before {
+    content: '';
+    width: 20px; height: 1px;
+    background: var(--gold);
+    opacity: 0.4;
+  }
+  .section-title {
+    font-family: var(--font-d);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+  .section-title em { font-style: italic; font-weight: 400; color: var(--gold); }
+
+  /* ── FEATURE CARDS ── */
+  .features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 0.5rem;
+  }
+  .feature {
+    background: var(--bg1);
+    padding: 1.5rem 1.4rem;
+    transition: background 0.2s;
+    position: relative;
+  }
+  .feature:hover { background: var(--bg2); }
+  .feature::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .feature:hover::before { opacity: 0.5; }
+  .feature-icon {
+    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
+    display: block;
+  }
+  .feature-num {
+    font-family: var(--font-m);
+    font-size: 0.52rem;
+    letter-spacing: 0.2em;
+    color: var(--text3);
+    margin-bottom: 0.3rem;
+  }
+  .feature-name {
+    font-family: var(--font-d);
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+  .feature-desc {
+    font-size: 0.78rem;
+    line-height: 1.7;
+    color: var(--text2);
+  }
+  .feature-desc strong { color: var(--text1); font-weight: 500; }
+
+  /* ── COMPARISON TABLE ── */
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    margin-top: 0.5rem;
+  }
+  .cmp {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+    min-width: 560px;
+  }
+  .cmp th {
+    font-family: var(--font-m);
+    font-size: 0.54rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text3);
+    font-weight: 400;
+    padding: 0.85rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+    white-space: nowrap;
+  }
+  .cmp td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text2);
+    vertical-align: middle;
+  }
+  .cmp tr:last-child td { border-bottom: none; }
+  .cmp tr:hover td { background: rgba(255,255,255,0.015); }
+  .cmp td:first-child { color: var(--text1); font-weight: 400; }
+  .cmp td:last-child {
+    color: var(--gold);
+    font-weight: 500;
+    background: var(--gold-dim);
+  }
+  .cmp tr:hover td:last-child { background: rgba(200,169,110,0.14); }
+  .yes { color: var(--green); }
+  .no  { color: var(--text3); }
+  .partial { color: var(--amber); }
+
+  /* ── COST PATHS ── */
+  .paths { display: grid; gap: 1rem; margin-top: 0.5rem; }
+
+  .path {
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .path-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .path-badge {
+    font-family: var(--font-m);
+    font-size: 0.5rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    font-weight: 400;
+    flex-shrink: 0;
+  }
+  .badge-green { background: rgba(110,191,139,0.12); color: var(--green); border: 1px solid rgba(110,191,139,0.25); }
+  .badge-blue  { background: rgba(110,159,191,0.12); color: var(--blue);  border: 1px solid rgba(110,159,191,0.25); }
+  .badge-amber { background: rgba(191,155,110,0.12); color: var(--amber); border: 1px solid rgba(191,155,110,0.25); }
+
+  .path-title {
+    font-family: var(--font-d);
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .path-sub {
+    font-size: 0.72rem;
+    color: var(--text2);
+    margin-left: auto;
+    white-space: nowrap;
+  }
+  .path-body { padding: 1rem 1.25rem; }
+
+  .cost-table { width: 100%; border-collapse: collapse; }
+  .cost-table td {
+    padding: 0.45rem 0;
+    font-size: 0.78rem;
+    color: var(--text2);
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .cost-table tr:last-child td { border-bottom: none; }
+  .cost-table td:last-child {
+    text-align: right;
+    font-family: var(--font-m);
+    font-size: 0.73rem;
+    color: var(--text1);
+  }
+  .cost-table tr.total td {
+    color: var(--gold);
+    font-weight: 500;
+    border-top: 1px solid var(--border);
+    padding-top: 0.7rem;
+    margin-top: 0.2rem;
+  }
+  .cost-total-amt {
+    font-family: var(--font-d);
+    font-size: 1.3rem;
+    color: var(--gold);
+  }
+  .path-note {
+    font-size: 0.72rem;
+    color: var(--text3);
+    font-style: italic;
+    margin-top: 0.75rem;
+    line-height: 1.6;
+  }
+
+  /* ── ROADMAP / TIMELINE (the signature element) ── */
+  .roadmap { position: relative; margin-top: 0.5rem; }
+
+  /* Vertical spine */
+  .roadmap::before {
+    content: '';
+    position: absolute;
+    left: 22px; top: 12px; bottom: 12px;
+    width: 1px;
+    background: linear-gradient(180deg, var(--gold) 0%, rgba(200,169,110,0.1) 100%);
+  }
+
+  .phase {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+  .phase:last-child { margin-bottom: 0; }
+
+  .phase-node {
+    flex-shrink: 0;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--bg1);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    z-index: 1;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .phase:hover .phase-node {
+    border-color: var(--gold-bd);
+    box-shadow: 0 0 20px rgba(200,169,110,0.1);
+  }
+  .phase-node-inner {
+    font-family: var(--font-m);
+    font-size: 0.6rem;
+    letter-spacing: 0.05em;
+    color: var(--gold);
+    font-weight: 400;
+  }
+
+  .phase-content {
+    flex: 1;
+    background: var(--bg1);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 1.1rem 1.25rem 1.1rem;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .phase:hover .phase-content {
+    background: var(--bg2);
+    border-color: rgba(255,255,255,0.1);
+  }
+
+  .phase-top {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .phase-name {
+    font-family: var(--font-d);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .phase-timing {
+    font-family: var(--font-m);
+    font-size: 0.55rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text3);
+  }
+  .phase-cost {
+    margin-left: auto;
+    font-family: var(--font-m);
+    font-size: 0.7rem;
+    color: var(--gold);
+    opacity: 0.8;
+  }
+
+  .phase-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-top: 0.3rem;
+  }
+  .phase-items li {
+    font-size: 0.78rem;
+    color: var(--text2);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.55rem;
+    line-height: 1.5;
+  }
+  .phase-items li::before {
+    content: '–';
+    color: var(--gold);
+    opacity: 0.4;
+    flex-shrink: 0;
+    margin-top: 0.05rem;
+  }
+
+  /* ── MOAT CALLOUT ── */
+  .moat {
+    background: var(--gold-dim);
+    border: 1px solid var(--gold-bd);
+    border-radius: 2px;
+    padding: 2rem 1.75rem;
+    position: relative;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+  .moat::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    opacity: 0.6;
+  }
+  .moat-label {
+    font-family: var(--font-m);
+    font-size: 0.54rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.7;
+    margin-bottom: 0.75rem;
+  }
+  .moat-quote {
+    font-family: var(--font-d);
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--text1);
+    margin-bottom: 1rem;
+  }
+  .moat-conclusion {
+    font-size: 0.82rem;
+    color: var(--text2);
+    line-height: 1.7;
+  }
+  .moat-conclusion strong {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  /* ── REVENUE CALLOUT ── */
+  .revenue-box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 1.25rem 0 0;
+  }
+  .rev-stat {
+    background: var(--bg1);
+    padding: 1.1rem 1rem;
+    text-align: center;
+  }
+  .rev-num {
+    font-family: var(--font-d);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--gold);
+    display: block;
+    line-height: 1.1;
+  }
+  .rev-label {
+    font-family: var(--font-m);
+    font-size: 0.52rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-top: 0.35rem;
+    display: block;
+  }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    margin-top: 5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-brand {
+    font-family: var(--font-d);
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--text2);
+  }
+  .footer-brand strong { font-style: normal; color: var(--text1); }
+  .footer-note {
+    font-family: var(--font-m);
+    font-size: 0.52rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text3);
+  }
+
+  /* ── DIVIDER ── */
+  .rule {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 3rem 0;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 620px) {
+    .features { grid-template-columns: 1fr; }
+    .toc-list { grid-template-columns: 1fr; }
+    .revenue-box { grid-template-columns: 1fr; }
+    .path-sub { display: none; }
+    .phase-cost { margin-left: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-eyebrow">Founder Reference Document</div>
+    <h1 class="header-title">Spot<em>Style</em></h1>
+    <p class="header-tagline">"See it anywhere. Own it in seconds."</p>
+    <div class="header-meta">
+      <span class="meta-pill">Fashion Tech</span>
+      <span class="meta-pill">Micro-SaaS</span>
+      <span class="meta-pill">MVP First</span>
+      <span class="meta-pill">2026 Roadmap</span>
+    </div>
+  </header>
+
+  <!-- TOC -->
+  <nav class="toc" aria-label="Contents">
+    <div class="toc-label">Contents</div>
+    <ul class="toc-list">
+      <li><a href="#features">Core Features</a></li>
+      <li><a href="#standout">Why It Stands Out</a></li>
+      <li><a href="#investment">Investment Breakdown</a></li>
+      <li><a href="#roadmap">Phase-by-Phase Roadmap</a></li>
+      <li><a href="#revenue">Revenue Model</a></li>
+      <li><a href="#moat">The Winning Edge</a></li>
+    </ul>
+  </nav>
+
+  <!-- FEATURES -->
+  <section class="section" id="features">
+    <div class="section-eyebrow">What It Does</div>
+    <h2 class="section-title">Core <em>Features</em></h2>
+
+    <div class="features">
+
+      <div class="feature">
+        <span class="feature-icon">📸</span>
+        <div class="feature-num">Feature 01</div>
+        <div class="feature-name">Snap &amp; Identify</div>
+        <p class="feature-desc">Point your camera at anyone wearing anything. The AI breaks the outfit into <strong>individual pieces</strong> — jacket, shoes, bag, jeans, accessories — and identifies each one separately. Not just "similar vibes" — actual product matches.</p>
+      </div>
+
+      <div class="feature">
+        <span class="feature-icon">🛒</span>
+        <div class="feature-num">Feature 02</div>
+        <div class="feature-name">One-Tap Shop</div>
+        <p class="feature-desc">Every identified item links directly to where you can buy it. <strong>Multiple retailers shown side by side</strong> so you can pick the best price. Cashback and discount codes surfaced automatically.</p>
+      </div>
+
+      <div class="feature">
+        <span class="feature-icon">💸</span>
+        <div class="feature-num">Feature 03</div>
+        <div class="feature-name">Budget Alternatives</div>
+        <p class="feature-desc">Can't afford the exact item? SpotStyle automatically finds lookalikes at <strong>3 different price points</strong> — luxury, mid-range, and budget — so no one is priced out.</p>
+      </div>
+
+      <div class="feature">
+        <span class="feature-icon">👤</span>
+        <div class="feature-num">Feature 04</div>
+        <div class="feature-name">Your Style Profile</div>
+        <p class="feature-desc">One-time setup: body type, preferred style, budget range. Every result is then filtered through <strong>your lens</strong> — not just "here's the item" but "here's how it'd look on someone built like you."</p>
+      </div>
+
+      <div class="feature">
+        <span class="feature-icon">💾</span>
+        <div class="feature-num">Feature 05</div>
+        <div class="feature-name">Spotted Feed</div>
+        <p class="feature-desc">Save every outfit you spot into a <strong>personal mood board</strong>. Organise by occasion, season, or vibe. Think Pinterest — but built around real-world things you actually saw and want.</p>
+      </div>
+
+      <div class="feature">
+        <span class="feature-icon">🔗</span>
+        <div class="feature-num">Feature 06</div>
+        <div class="feature-name">Share a Spot</div>
+        <p class="feature-desc">Found an incredible outfit? Share the full breakdown — every piece, every price — <strong>as one link</strong>. Friends can shop the exact same look directly from your share.</p>
+      </div>
+
+      <div class="feature">
+        <span class="feature-icon">📱</span>
+        <div class="feature-num">Feature 07</div>
+        <div class="feature-name">Import from Anywhere</div>
+        <p class="feature-desc">Screenshot from <strong>TikTok, Instagram, Netflix</strong>, or anywhere else — drag it into SpotStyle and it works the same as a live photo. This kills Screenshop's workflow.</p>
+      </div>
+
+      <div class="feature">
+        <span class="feature-icon">⭐</span>
+        <div class="feature-num">Feature 08</div>
+        <div class="feature-name">Style Rating</div>
+        <p class="feature-desc">After identifying an outfit, AI tells you <strong>why it works</strong> — the colour theory, the silhouette logic, the occasion fit — so you actually learn style, not just copy it.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="rule"/>
+
+  <!-- STANDOUT -->
+  <section class="section" id="standout">
+    <div class="section-eyebrow">Competitive Position</div>
+    <h2 class="section-title">Why It <em>Stands Out</em></h2>
+
+    <div class="table-wrap">
+      <table class="cmp">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Google Lens</th>
+            <th>Screenshop</th>
+            <th>Shop the Look</th>
+            <th>SpotStyle ✦</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Works on street photos</td>
+            <td class="yes">✓</td>
+            <td class="yes">✓</td>
+            <td class="yes">✓</td>
+            <td class="yes">✓</td>
+          </tr>
+          <tr>
+            <td>Budget alternatives</td>
+            <td class="no">✗</td>
+            <td class="no">✗</td>
+            <td class="partial">Partial</td>
+            <td class="yes">✓</td>
+          </tr>
+          <tr>
+            <td>Style profile filter</td>
+            <td class="no">✗</td>
+            <td class="no">✗</td>
+            <td class="no">✗</td>
+            <td class="yes">✓</td>
+          </tr>
+          <tr>
+            <td>Explains <em>why</em> it works</td>
+            <td class="no">✗</td>
+            <td class="no">✗</td>
+            <td class="no">✗</td>
+            <td class="yes">✓</td>
+          </tr>
+          <tr>
+            <td>Shareable look links</td>
+            <td class="no">✗</td>
+            <td class="no">✗</td>
+            <td class="no">✗</td>
+            <td class="yes">✓</td>
+          </tr>
+          <tr>
+            <td>Screenshot import</td>
+            <td class="partial">Partial</td>
+            <td class="yes">✓</td>
+            <td class="no">✗</td>
+            <td class="yes">✓</td>
+          </tr>
+          <tr>
+            <td>Cashback built-in</td>
+            <td class="no">✗</td>
+            <td class="no">✗</td>
+            <td class="yes">✓</td>
+            <td class="yes">✓</td>
+          </tr>
+          <tr>
+            <td>Saves spotted feed</td>
+            <td class="no">✗</td>
+            <td class="no">✗</td>
+            <td class="no">✗</td>
+            <td class="yes">✓</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin-top:1.1rem;font-size:0.82rem;color:var(--text2);font-style:italic;">The existing apps are search tools. SpotStyle is a <strong style="color:var(--text1);font-style:normal;">fashion companion</strong>. That's the difference.</p>
+  </section>
+
+  <hr class="rule"/>
+
+  <!-- INVESTMENT -->
+  <section class="section" id="investment">
+    <div class="section-eyebrow">The Money</div>
+    <h2 class="section-title">Investment <em>Breakdown</em></h2>
+
+    <div class="paths">
+
+      <!-- Path 1 -->
+      <div class="path">
+        <div class="path-header">
+          <span class="path-badge badge-green">Recommended</span>
+          <span class="path-title">Path 1 — Bootstrap MVP</span>
+          <span class="path-sub">Build just enough to prove it works</span>
+        </div>
+        <div class="path-body">
+          <table class="cost-table">
+            <tr><td>UI/UX Design</td><td>$2,000 – $4,000</td></tr>
+            <tr><td>Frontend App (React Native — iOS + Android)</td><td>$6,000 – $10,000</td></tr>
+            <tr><td>Backend &amp; Database</td><td>$3,000 – $5,000</td></tr>
+            <tr><td>Google Vision API / AWS Rekognition</td><td>$2,000 – $3,000</td></tr>
+            <tr><td>Affiliate network setup (AWIN, ShareASale)</td><td>$500 – $1,000</td></tr>
+            <tr><td>Basic AI style matching</td><td>$3,000 – $5,000</td></tr>
+            <tr><td>Testing &amp; launch</td><td>$1,500 – $2,500</td></tr>
+            <tr class="total">
+              <td><strong>Total MVP</strong></td>
+              <td><span class="cost-total-amt">$18K – $30K</span></td>
+            </tr>
+            <tr><td style="color:var(--text3)">Monthly running costs</td><td style="color:var(--text3)">~$300 – $600/mo</td></tr>
+          </table>
+          <p class="path-note">Uses pre-trained AI models via API — no need to build from scratch. Fastest path to a live product users can actually test.</p>
+        </div>
+      </div>
+
+      <!-- Path 2 -->
+      <div class="path">
+        <div class="path-header">
+          <span class="path-badge badge-blue">After MVP</span>
+          <span class="path-title">Path 2 — Full Version</span>
+          <span class="path-sub">Style profile, share links, budget engine</span>
+        </div>
+        <div class="path-body">
+          <table class="cost-table">
+            <tr><td>Everything in MVP, plus:</td><td></td></tr>
+            <tr><td>Style profile + body-type filtering engine</td><td>$8,000 – $15,000</td></tr>
+            <tr><td>Budget alternatives matching system</td><td>$5,000 – $10,000</td></tr>
+            <tr><td>Shareable look links + social layer</td><td>$4,000 – $8,000</td></tr>
+            <tr><td>Spotted Feed + mood board UI</td><td>$3,000 – $6,000</td></tr>
+            <tr class="total">
+              <td><strong>Total Full Build</strong></td>
+              <td><span class="cost-total-amt">$45K – $75K</span></td>
+            </tr>
+          </table>
+          <p class="path-note">Fund this with affiliate revenue from Path 1. By this point you'll have real user data telling you exactly what to prioritise.</p>
+        </div>
+      </div>
+
+      <!-- Path 3 -->
+      <div class="path">
+        <div class="path-header">
+          <span class="path-badge badge-amber">DIY Option</span>
+          <span class="path-title">Path 3 — Build It Yourself</span>
+          <span class="path-sub">React Native + Supabase + Google Vision API</span>
+        </div>
+        <div class="path-body">
+          <table class="cost-table">
+            <tr><td>API costs &amp; hosting only</td><td>$500 – $2,000</td></tr>
+            <tr><td>Your time (estimated)</td><td>8 – 16 weeks</td></tr>
+            <tr class="total">
+              <td><strong>Total out-of-pocket</strong></td>
+              <td><span class="cost-total-amt">~$1,500</span></td>
+            </tr>
+          </table>
+          <p class="path-note">Fully realistic with today's tools. AI makes building faster than ever — a focused solo developer can ship an MVP in 8 weeks using existing APIs and no-code helpers.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="rule"/>
+
+  <!-- ROADMAP -->
+  <section class="section" id="roadmap">
+    <div class="section-eyebrow">The Plan</div>
+    <h2 class="section-title">Phase-by-Phase <em>Roadmap</em></h2>
+
+    <div class="roadmap">
+
+      <div class="phase">
+        <div class="phase-node"><span class="phase-node-inner">P1</span></div>
+        <div class="phase-content">
+          <div class="phase-top">
+            <span class="phase-name">Validate</span>
+            <span class="phase-timing">Weeks 1–4</span>
+            <span class="phase-cost">$0</span>
+          </div>
+          <ul class="phase-items">
+            <li>Download Screenshop and Shop the Look — use them every single day for a week</li>
+            <li>Keep a doc of every frustration, every failed search, every clunky moment</li>
+            <li>Post in r/femalefashionadvice, r/streetwear, r/malefashionadvice — ask what frustrates people about finding outfits IRL</li>
+            <li>Let real users write your product spec for free</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-node"><span class="phase-node-inner">P2</span></div>
+        <div class="phase-content">
+          <div class="phase-top">
+            <span class="phase-name">Build MVP</span>
+            <span class="phase-timing">Weeks 5–16</span>
+            <span class="phase-cost">$18K–$30K or DIY</span>
+          </div>
+          <ul class="phase-items">
+            <li>Core snap-and-identify feature only — nothing else</li>
+            <li>Connect to 3 affiliate retailers (Amazon, ASOS, Zara)</li>
+            <li>Basic saved feed so users can bookmark looks</li>
+            <li>iOS first — Android after you have traction</li>
+            <li>No style profile yet — keep the scope ruthlessly small</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-node"><span class="phase-node-inner">P3</span></div>
+        <div class="phase-content">
+          <div class="phase-top">
+            <span class="phase-name">Launch &amp; Test</span>
+            <span class="phase-timing">Week 17</span>
+            <span class="phase-cost">~$500</span>
+          </div>
+          <ul class="phase-items">
+            <li>Post on TikTok: "I saw this outfit on the street → found every piece in 10 seconds" — this format is made for virality</li>
+            <li>Submit to Product Hunt on a Tuesday</li>
+            <li>DM 20 fashion micro-influencers (10k–100k followers) — offer free Pro access for an honest review</li>
+            <li>Post the comparison table (SpotStyle vs competitors) in fashion subreddits</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-node"><span class="phase-node-inner">P4</span></div>
+        <div class="phase-content">
+          <div class="phase-top">
+            <span class="phase-name">Monetise</span>
+            <span class="phase-timing">Month 4+</span>
+            <span class="phase-cost">Revenue starts</span>
+          </div>
+          <ul class="phase-items">
+            <li>Affiliate commissions active from day one — 5–15% of every purchase made through your links</li>
+            <li>Add $4.99/month Pro tier: unlocks style profile, shareable look links, and unlimited spotted feed</li>
+            <li>1,000 users × 1 purchase/month × $60 avg × 8% commission = <strong style="color:var(--gold);">$4,800/month passive</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-node"><span class="phase-node-inner">P5</span></div>
+        <div class="phase-content">
+          <div class="phase-top">
+            <span class="phase-name">Full Build</span>
+            <span class="phase-timing">Month 6+</span>
+            <span class="phase-cost">Funded by revenue</span>
+          </div>
+          <ul class="phase-items">
+            <li>Use affiliate income to fund the budget alternatives engine</li>
+            <li>Build the style profile and body-type filtering system</li>
+            <li>Launch the Share a Spot social layer</li>
+            <li>By this point you have real user data telling you exactly what to build next — no guessing</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="rule"/>
+
+  <!-- REVENUE -->
+  <section class="section" id="revenue">
+    <div class="section-eyebrow">The Math</div>
+    <h2 class="section-title">Revenue <em>Model</em></h2>
+    <p style="font-size:0.85rem;color:var(--text2);margin-bottom:0.5rem;">Two streams. Both start early. One scales with users, one scales with purchases.</p>
+
+    <div class="revenue-box">
+      <div class="rev-stat">
+        <span class="rev-num">5–15%</span>
+        <span class="rev-label">Affiliate commission per sale</span>
+      </div>
+      <div class="rev-stat">
+        <span class="rev-num">$4.99</span>
+        <span class="rev-label">Pro tier / month</span>
+      </div>
+      <div class="rev-stat">
+        <span class="rev-num">$4,800</span>
+        <span class="rev-label">Monthly at 1,000 users</span>
+      </div>
+    </div>
+
+    <p style="margin-top:1rem;font-size:0.78rem;color:var(--text3);font-style:italic;">Estimate: 1,000 users × 1 purchase/month × $60 avg order × 8% commission. Conservative. Fashion audiences buy frequently.</p>
+  </section>
+
+  <hr class="rule"/>
+
+  <!-- MOAT -->
+  <section class="section" id="moat">
+    <div class="section-eyebrow">The Winning Edge</div>
+    <h2 class="section-title">The One Thing That <em>Makes This Win</em></h2>
+
+    <div class="moat">
+      <div class="moat-label">Core Insight</div>
+      <p class="moat-quote">"Every competitor built a search engine. You're building a style companion."</p>
+      <p class="moat-conclusion">
+        The moment someone uses SpotStyle and gets told <strong>"this is a relaxed French tuck silhouette, it works because of the colour contrast, and here's how to get the same look for $45 instead of $340"</strong> — they will never go back to Google Lens.<br/><br/>
+        That's your moat. Build that one thing better than anyone else, and the rest follows.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-brand"><em>Spot</em><strong>Style</strong> — Founder Guide</div>
+    <div class="footer-note">Built from conversation · 2026</div>
+  </footer>
+
+</div>
+</body>
+</html>
