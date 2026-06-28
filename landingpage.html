@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SpotStyle — See It. Find It. Own It.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════
+   TOKENS
+═══════════════════════════════════ */
+:root {
+  --bg:       #0A0808;
+  --bg1:      #111010;
+  --bg2:      #1A1818;
+  --card:     #141212;
+  --blush:    #F2C4B0;
+  --blush-d:  #D9A08A;
+  --blush-dim:rgba(242,196,176,0.10);
+  --blush-bd: rgba(242,196,176,0.20);
+  --cream:    #F5F0E8;
+  --muted:    #8C8078;
+  --faint:    #3A3432;
+  --border:   rgba(255,255,255,0.06);
+  --green:    #7EC8A0;
+
+  --fd: 'Cormorant Garamond', Georgia, serif;
+  --fb: 'Inter', system-ui, sans-serif;
+
+  --ease: cubic-bezier(0.22,1,0.36,1);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:16px;scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--cream);
+  font-family:var(--fb);
+  font-weight:300;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;}
+img{display:block;}
+
+/* ═══════════════════════════════════
+   NAV
+═══════════════════════════════════ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:62px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;
+  background:rgba(10,8,8,0.85);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:var(--fd);
+  font-size:1.4rem;font-weight:600;
+  letter-spacing:-0.01em;
+  color:var(--cream);
+}
+.nav-logo span{color:var(--blush);}
+.nav-links{display:flex;align-items:center;gap:2rem;}
+.nav-links a{
+  font-size:0.75rem;font-weight:400;
+  letter-spacing:0.06em;
+  color:var(--muted);
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--cream);}
+.nav-cta{
+  background:var(--blush);
+  color:#1A0808;
+  font-size:0.72rem;font-weight:600;
+  letter-spacing:0.08em;
+  padding:0.55rem 1.3rem;
+  border-radius:100px;
+  transition:all 0.25s var(--ease);
+}
+.nav-cta:hover{background:var(--cream);transform:translateY(-1px);}
+
+/* ═══════════════════════════════════
+   HERO
+═══════════════════════════════════ */
+.hero{
+  min-height:100dvh;
+  display:flex;align-items:center;
+  padding:7rem 2.5rem 5rem;
+  position:relative;
+  overflow:hidden;
+}
+
+/* Subtle radial warm wash */
+.hero::before{
+  content:'';
+  position:absolute;
+  width:700px;height:700px;
+  background:radial-gradient(circle, rgba(242,196,176,0.07) 0%, transparent 65%);
+  top:-100px;right:-100px;
+  pointer-events:none;
+}
+
+.hero-inner{
+  max-width:1160px;margin:0 auto;width:100%;
+  display:grid;
+  grid-template-columns:1fr 420px;
+  gap:4rem;
+  align-items:center;
+}
+
+.hero-left{}
+
+.hero-tag{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  font-size:0.68rem;font-weight:500;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--blush);
+  border:1px solid var(--blush-bd);
+  background:var(--blush-dim);
+  padding:0.35rem 0.85rem;
+  border-radius:100px;
+  margin-bottom:1.8rem;
+}
+.hero-tag-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:var(--blush);
+  animation:pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot{0%,100%{opacity:1;}50%{opacity:0.3;}}
+
+.hero-h1{
+  font-family:var(--fd);
+  font-size:clamp(3.5rem,7vw,6.5rem);
+  font-weight:300;
+  line-height:0.95;
+  letter-spacing:-0.02em;
+  margin-bottom:1.5rem;
+}
+.hero-h1 em{
+  font-style:italic;
+  font-weight:300;
+  color:var(--blush);
+}
+.hero-h1 .block{display:block;}
+
+.hero-sub{
+  font-size:1.05rem;
+  line-height:1.75;
+  color:var(--muted);
+  max-width:440px;
+  margin-bottom:2.5rem;
+  font-weight:300;
+}
+.hero-sub strong{color:var(--cream);font-weight:400;}
+
+.hero-btns{
+  display:flex;align-items:center;gap:1rem;
+  flex-wrap:wrap;
+}
+.btn-main{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  background:var(--blush);
+  color:#1A0808;
+  font-size:0.82rem;font-weight:600;
+  letter-spacing:0.04em;
+  padding:0.9rem 2rem;
+  border-radius:100px;
+  transition:all 0.3s var(--ease);
+  box-shadow:0 8px 32px rgba(242,196,176,0.25);
+}
+.btn-main:hover{
+  background:var(--cream);
+  transform:translateY(-3px);
+  box-shadow:0 16px 48px rgba(242,196,176,0.35);
+}
+.btn-main svg{width:16px;height:16px;flex-shrink:0;}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  font-size:0.8rem;font-weight:400;
+  color:var(--muted);
+  border-bottom:1px solid var(--faint);
+  padding-bottom:1px;
+  transition:color 0.2s,border-color 0.2s;
+}
+.btn-ghost:hover{color:var(--cream);border-color:var(--muted);}
+
+.hero-proof{
+  display:flex;align-items:center;gap:1.2rem;
+  margin-top:2.5rem;
+  padding-top:2rem;
+  border-top:1px solid var(--border);
+}
+.proof-stars{
+  display:flex;gap:2px;
+}
+.proof-stars span{color:var(--blush);font-size:0.85rem;}
+.proof-text{
+  font-size:0.75rem;
+  color:var(--muted);
+}
+.proof-text strong{color:var(--cream);font-weight:500;}
+.proof-sep{width:1px;height:24px;background:var(--border);}
+.proof-stat{
+  font-size:0.75rem;color:var(--muted);
+}
+.proof-stat strong{color:var(--cream);font-weight:500;}
+
+/* ═══════════════════════════════════
+   PHONE MOCKUP (pure CSS)
+═══════════════════════════════════ */
+.phone-wrap{
+  display:flex;justify-content:center;
+  position:relative;
+}
+.phone-wrap::before{
+  content:'';
+  position:absolute;
+  width:300px;height:300px;
+  background:radial-gradient(circle,rgba(242,196,176,0.12) 0%,transparent 70%);
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+
+.phone{
+  width:260px;
+  background:var(--bg1);
+  border-radius:36px;
+  border:1px solid rgba(255,255,255,0.1);
+  overflow:hidden;
+  box-shadow:
+    0 0 0 8px rgba(255,255,255,0.03),
+    0 40px 80px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+  position:relative;
+  flex-shrink:0;
+}
+
+/* notch */
+.phone-notch{
+  width:90px;height:26px;
+  background:var(--bg1);
+  border-radius:0 0 18px 18px;
+  margin:0 auto;
+  border:1px solid rgba(255,255,255,0.06);
+  border-top:none;
+  position:relative;z-index:2;
+}
+
+.phone-screen{
+  background:linear-gradient(160deg,#1C1615 0%,#120F0E 100%);
+  padding:0.75rem;
+  min-height:480px;
+  position:relative;
+  overflow:hidden;
+}
+
+/* App UI inside phone */
+.app-topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:0.75rem;
+}
+.app-name{
+  font-family:var(--fd);
+  font-size:0.95rem;font-weight:600;
+  color:var(--cream);
+  letter-spacing:-0.01em;
+}
+.app-icon{
+  width:24px;height:24px;border-radius:50%;
+  background:var(--blush-dim);
+  border:1px solid var(--blush-bd);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.6rem;
+  color:var(--blush);
+}
+
+/* Viewfinder */
+.viewfinder{
+  background:#0D0B0B;
+  border-radius:12px;
+  height:180px;
+  position:relative;
+  overflow:hidden;
+  margin-bottom:0.75rem;
+  border:1px solid var(--border);
+}
+.vf-corner{
+  position:absolute;
+  width:20px;height:20px;
+  border-color:var(--blush);
+  border-style:solid;
+  opacity:0.7;
+}
+.vf-tl{top:8px;left:8px;border-width:2px 0 0 2px;border-radius:3px 0 0 0;}
+.vf-tr{top:8px;right:8px;border-width:2px 2px 0 0;border-radius:0 3px 0 0;}
+.vf-bl{bottom:8px;left:8px;border-width:0 0 2px 2px;border-radius:0 0 0 3px;}
+.vf-br{bottom:8px;right:8px;border-width:0 2px 2px 0;border-radius:0 0 3px 0;}
+
+/* Animated outfit silhouette */
+.vf-figure{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+}
+.vf-head{
+  width:20px;height:20px;border-radius:50%;
+  background:rgba(242,196,176,0.15);
+  border:1px solid rgba(242,196,176,0.3);
+}
+.vf-body{
+  width:36px;height:44px;border-radius:6px 6px 3px 3px;
+  background:rgba(242,196,176,0.08);
+  border:1px solid rgba(242,196,176,0.2);
+  position:relative;
+}
+.vf-legs{
+  display:flex;gap:3px;
+}
+.vf-leg{
+  width:15px;height:32px;border-radius:3px;
+  background:rgba(242,196,176,0.06);
+  border:1px solid rgba(242,196,176,0.15);
+}
+
+/* Scan line */
+.vf-scan{
+  position:absolute;
+  left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--blush),transparent);
+  opacity:0.6;
+  animation:scan-move 2.5s ease-in-out infinite;
+  top:20%;
+}
+@keyframes scan-move{
+  0%{top:15%;opacity:0;}
+  20%{opacity:0.6;}
+  80%{opacity:0.6;}
+  100%{top:85%;opacity:0;}
+}
+
+/* Detected tags */
+.vf-tag{
+  position:absolute;
+  background:rgba(10,8,8,0.85);
+  border:1px solid var(--blush-bd);
+  border-radius:4px;
+  padding:2px 6px;
+  font-size:0.45rem;
+  font-weight:500;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--blush);
+  white-space:nowrap;
+  animation:tag-appear 0.4s ease forwards;
+  opacity:0;
+}
+.vf-tag::before{
+  content:'';
+  position:absolute;
+  width:6px;height:1px;
+  background:var(--blush-bd);
+}
+.vf-tag-1{top:22%;right:12%;animation-delay:1.2s;}
+.vf-tag-1::before{right:100%;top:50%;}
+.vf-tag-2{top:42%;left:10%;animation-delay:1.6s;}
+.vf-tag-2::before{left:100%;top:50%;}
+.vf-tag-3{bottom:25%;right:10%;animation-delay:2s;}
+.vf-tag-3::before{right:100%;top:50%;}
+@keyframes tag-appear{to{opacity:1;}}
+
+/* Results cards */
+.app-results{display:flex;flex-direction:column;gap:0.45rem;}
+.result-card{
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:0.5rem 0.6rem;
+  display:flex;align-items:center;gap:0.5rem;
+  animation:slide-up 0.4s var(--ease) forwards;
+  opacity:0;
+}
+.rc1{animation-delay:2.4s;}
+.rc2{animation-delay:2.7s;}
+.rc3{animation-delay:3.0s;}
+@keyframes slide-up{
+  from{opacity:0;transform:translateY(6px);}
+  to{opacity:1;transform:translateY(0);}
+}
+.rc-swatch{
+  width:28px;height:28px;border-radius:5px;
+  flex-shrink:0;
+  border:1px solid rgba(255,255,255,0.08);
+}
+.rc-info{flex:1;min-width:0;}
+.rc-name{font-size:0.55rem;font-weight:500;color:var(--cream);margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.rc-brand{font-size:0.48rem;color:var(--muted);}
+.rc-price{
+  font-family:var(--fd);
+  font-size:0.8rem;font-weight:600;
+  color:var(--blush);
+  white-space:nowrap;
+}
+.rc-buy{
+  background:var(--blush);
+  color:#1A0808;
+  font-size:0.45rem;font-weight:700;
+  letter-spacing:0.1em;text-transform:uppercase;
+  padding:0.25rem 0.45rem;
+  border-radius:4px;
+  white-space:nowrap;
+}
+
+/* ═══════════════════════════════════
+   SOCIAL PROOF TICKER
+═══════════════════════════════════ */
+.ticker{
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  overflow:hidden;
+  background:var(--bg1);
+  padding:0.75rem 0;
+  white-space:nowrap;
+}
+.ticker-inner{
+  display:inline-flex;
+  animation:ticker-run 22s linear infinite;
+}
+@keyframes ticker-run{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.ticker-inner:hover{animation-play-state:paused;}
+.tick{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:0 2.5rem;
+  font-size:0.72rem;
+  color:var(--muted);
+}
+.tick strong{color:var(--cream);font-weight:500;}
+.tick-star{color:var(--blush);font-size:0.7rem;}
+
+/* ═══════════════════════════════════
+   SECTION SHARED
+═══════════════════════════════════ */
+.wrap{max-width:1160px;margin:0 auto;padding:0 2.5rem;width:100%;}
+
+.sec{padding:6rem 0;}
+.sec-eyebrow{
+  font-size:0.65rem;font-weight:500;
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--blush);
+  margin-bottom:0.75rem;
+  display:flex;align-items:center;gap:0.6rem;
+}
+.sec-eyebrow::before{
+  content:'';width:24px;height:1px;
+  background:var(--blush);opacity:0.5;
+}
+.sec-h2{
+  font-family:var(--fd);
+  font-size:clamp(2.2rem,4vw,3.5rem);
+  font-weight:300;
+  letter-spacing:-0.02em;
+  line-height:1.1;
+  margin-bottom:1rem;
+}
+.sec-h2 em{font-style:italic;color:var(--blush);}
+.sec-sub{
+  font-size:0.95rem;line-height:1.75;
+  color:var(--muted);font-weight:300;
+  max-width:500px;
+}
+
+/* ═══════════════════════════════════
+   HOW IT WORKS
+═══════════════════════════════════ */
+.how-sec{background:var(--bg);}
+.how-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+  margin-top:3rem;
+}
+.how-card{
+  background:var(--card);
+  padding:2.5rem 2rem;
+  position:relative;
+  overflow:hidden;
+  transition:background 0.3s;
+}
+.how-card:hover{background:var(--bg2);}
+.how-card::after{
+  content:'';
+  position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--blush),transparent);
+  opacity:0;transition:opacity 0.4s;
+}
+.how-card:hover::after{opacity:0.5;}
+.how-num{
+  font-family:var(--fd);
+  font-size:3.5rem;font-weight:300;font-style:italic;
+  color:rgba(242,196,176,0.12);
+  line-height:1;
+  margin-bottom:1rem;
+  transition:color 0.3s;
+}
+.how-card:hover .how-num{color:rgba(242,196,176,0.22);}
+.how-icon{font-size:1.6rem;margin-bottom:0.75rem;display:block;}
+.how-title{
+  font-family:var(--fd);
+  font-size:1.35rem;font-weight:600;
+  letter-spacing:-0.01em;
+  margin-bottom:0.6rem;
+}
+.how-desc{font-size:0.82rem;line-height:1.7;color:var(--muted);}
+.how-desc strong{color:var(--cream);font-weight:400;}
+
+/* ═══════════════════════════════════
+   FEATURES — alternating bricks
+═══════════════════════════════════ */
+.feat-sec{background:var(--bg1);}
+
+.feat-brick{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  border:1px solid var(--border);
+  overflow:hidden;
+  margin-bottom:1px;
+}
+.feat-brick:last-child{margin-bottom:0;}
+.feat-brick.flip .feat-visual{order:1;}
+.feat-brick.flip .feat-copy{order:2;}
+
+.feat-copy{
+  padding:3.5rem 3rem;
+  display:flex;flex-direction:column;justify-content:center;
+  background:var(--card);
+}
+.feat-tag{
+  font-size:0.6rem;font-weight:500;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--blush);opacity:0.75;
+  margin-bottom:0.6rem;
+}
+.feat-title{
+  font-family:var(--fd);
+  font-size:clamp(1.6rem,2.5vw,2.2rem);
+  font-weight:400;font-style:italic;
+  letter-spacing:-0.01em;
+  line-height:1.15;
+  margin-bottom:0.9rem;
+}
+.feat-body{
+  font-size:0.88rem;line-height:1.75;
+  color:var(--muted);
+  margin-bottom:1.25rem;
+}
+.feat-body strong{color:var(--cream);font-weight:400;}
+.feat-detail{
+  display:flex;flex-direction:column;gap:0.4rem;
+}
+.fd-item{
+  display:flex;align-items:center;gap:0.6rem;
+  font-size:0.78rem;color:var(--muted);
+}
+.fd-item::before{
+  content:'✦';
+  color:var(--blush);font-size:0.5rem;opacity:0.7;flex-shrink:0;
+}
+
+.feat-visual{
+  background:var(--bg2);
+  display:flex;align-items:center;justify-content:center;
+  padding:2.5rem;
+  min-height:320px;
+  position:relative;
+  overflow:hidden;
+}
+/* Blush gradient wash inside visual pane */
+.feat-visual::before{
+  content:'';
+  position:absolute;inset:0;
+  background:radial-gradient(circle at 60% 40%,rgba(242,196,176,0.06) 0%,transparent 65%);
+  pointer-events:none;
+}
+
+/* Mock visual content for each feature */
+.vis-snap{
+  display:flex;flex-direction:column;gap:0.5rem;width:100%;max-width:200px;
+}
+.vis-snap-img{
+  height:120px;
+  background:linear-gradient(135deg,#1E1A19,#151212);
+  border-radius:8px;
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.vis-snap-img::after{
+  content:'📸';font-size:2rem;
+  position:relative;z-index:1;
+}
+.vis-snap-tags{display:flex;flex-wrap:wrap;gap:0.3rem;}
+.vs-tag{
+  background:var(--blush-dim);
+  border:1px solid var(--blush-bd);
+  padding:0.2rem 0.5rem;
+  border-radius:4px;
+  font-size:0.58rem;font-weight:500;
+  color:var(--blush);
+}
+
+.vis-budget{
+  display:flex;flex-direction:column;gap:0.5rem;width:100%;max-width:200px;
+}
+.vb-row{
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(255,255,255,0.03);
+  border:1px solid var(--border);
+  border-radius:6px;
+  padding:0.6rem 0.75rem;
+}
+.vb-tier{
+  font-size:0.6rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+}
+.vb-price{
+  font-family:var(--fd);
+  font-size:1rem;font-weight:600;
+}
+.vb-luxury{color:#E0C98A;}
+.vb-mid{color:var(--blush);}
+.vb-budget{color:var(--green);}
+
+.vis-share{
+  display:flex;flex-direction:column;gap:0.5rem;width:100%;max-width:200px;
+}
+.vs-card{
+  background:rgba(255,255,255,0.03);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:0.75rem;
+}
+.vs-card-title{font-size:0.65rem;font-weight:500;color:var(--cream);margin-bottom:0.4rem;}
+.vs-items{display:flex;flex-direction:column;gap:0.25rem;}
+.vs-item{display:flex;justify-content:space-between;font-size:0.58rem;color:var(--muted);}
+.vs-item span:last-child{color:var(--blush);}
+.vs-link{
+  margin-top:0.4rem;
+  background:var(--blush);
+  color:#1A0808;
+  font-size:0.58rem;font-weight:600;
+  text-align:center;
+  padding:0.35rem;border-radius:4px;letter-spacing:0.05em;
+  display:block;
+}
+
+/* ═══════════════════════════════════
+   COMPARISON
+═══════════════════════════════════ */
+.cmp-sec{background:var(--bg);}
+.cmp-wrap{
+  overflow-x:auto;
+  border:1px solid var(--border);
+  margin-top:3rem;
+}
+.cmp-table{
+  width:100%;border-collapse:collapse;
+  font-size:0.82rem;min-width:600px;
+}
+.cmp-table th{
+  font-size:0.6rem;font-weight:500;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--muted);
+  padding:1rem 1.25rem;text-align:left;
+  border-bottom:1px solid var(--border);
+  background:var(--bg1);
+  font-family:var(--fb);
+}
+.cmp-table th:last-child{
+  color:var(--blush);
+  background:var(--blush-dim);
+}
+.cmp-table td{
+  padding:0.85rem 1.25rem;
+  border-bottom:1px solid var(--border);
+  color:var(--muted);
+  vertical-align:middle;
+}
+.cmp-table tr:last-child td{border-bottom:none;}
+.cmp-table td:first-child{color:var(--cream);}
+.cmp-table td:last-child{
+  background:var(--blush-dim);
+  color:var(--blush);
+  font-weight:500;
+}
+.cmp-table tr:hover td{background:rgba(255,255,255,0.015);}
+.cmp-table tr:hover td:last-child{background:rgba(242,196,176,0.12);}
+.ck{color:var(--green);font-size:1rem;}
+.nx{color:var(--faint);font-size:1rem;}
+.pt{color:#C8A96E;font-size:0.78rem;}
+
+/* ═══════════════════════════════════
+   PRICING
+═══════════════════════════════════ */
+.price-sec{background:var(--bg1);}
+.price-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+  margin-top:3rem;
+}
+.price-card{
+  background:var(--card);
+  padding:2.5rem 2rem;
+  position:relative;
+  transition:background 0.25s;
+}
+.price-card:hover{background:var(--bg2);}
+.price-card.featured{
+  background:var(--blush-dim);
+  border:1px solid var(--blush-bd);
+}
+.price-card.featured:hover{background:rgba(242,196,176,0.14);}
+.price-label{
+  font-size:0.6rem;font-weight:500;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:0.5rem;
+}
+.price-card.featured .price-label{color:var(--blush);}
+.price-name{
+  font-family:var(--fd);
+  font-size:1.5rem;font-weight:600;
+  margin-bottom:0.3rem;
+}
+.price-amount{
+  font-family:var(--fd);
+  font-size:3rem;font-weight:300;
+  line-height:1;color:var(--cream);
+  margin-bottom:0.3rem;
+}
+.price-amount sup{font-size:1.2rem;vertical-align:super;}
+.price-amount span{font-size:1rem;color:var(--muted);}
+.price-desc{font-size:0.78rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.6;}
+.price-features{
+  list-style:none;display:flex;flex-direction:column;gap:0.5rem;
+  margin-bottom:2rem;
+}
+.price-features li{
+  display:flex;align-items:center;gap:0.6rem;
+  font-size:0.8rem;color:var(--muted);
+}
+.price-features li::before{content:'✦';color:var(--blush);font-size:0.5rem;opacity:0.6;}
+.price-features li.active{color:var(--cream);}
+.price-features li.active::before{opacity:1;}
+.price-btn{
+  width:100%;
+  padding:0.9rem;
+  border-radius:8px;
+  font-size:0.78rem;font-weight:600;
+  letter-spacing:0.06em;
+  text-align:center;
+  transition:all 0.25s;
+  display:block;
+}
+.price-btn-ghost{
+  border:1px solid var(--border);
+  color:var(--muted);
+}
+.price-btn-ghost:hover{border-color:var(--blush-bd);color:var(--cream);}
+.price-btn-solid{
+  background:var(--blush);
+  color:#1A0808;
+  box-shadow:0 4px 20px rgba(242,196,176,0.2);
+}
+.price-btn-solid:hover{background:var(--cream);box-shadow:0 8px 32px rgba(242,196,176,0.3);}
+.featured-badge{
+  position:absolute;top:1.25rem;right:1.25rem;
+  font-size:0.52rem;font-weight:600;
+  letter-spacing:0.14em;text-transform:uppercase;
+  background:var(--blush);color:#1A0808;
+  padding:0.2rem 0.6rem;border-radius:100px;
+}
+
+/* ═══════════════════════════════════
+   TESTIMONIALS
+═══════════════════════════════════ */
+.testi-sec{background:var(--bg);}
+.testi-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);
+  margin-top:3rem;
+}
+.testi{
+  background:var(--card);
+  padding:2rem 1.75rem;
+  transition:background 0.25s;
+}
+.testi:hover{background:var(--bg2);}
+.testi-stars{
+  display:flex;gap:2px;margin-bottom:1rem;
+}
+.testi-stars span{color:var(--blush);font-size:0.75rem;}
+.testi-text{
+  font-family:var(--fd);
+  font-size:1.05rem;font-style:italic;font-weight:300;
+  line-height:1.55;color:var(--cream);
+  margin-bottom:1.25rem;
+}
+.testi-author{
+  display:flex;align-items:center;gap:0.6rem;
+}
+.testi-avatar{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--blush-dim);
+  border:1px solid var(--blush-bd);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.65rem;color:var(--blush);font-weight:500;
+  flex-shrink:0;
+}
+.testi-name{font-size:0.75rem;font-weight:500;color:var(--cream);}
+.testi-handle{font-size:0.65rem;color:var(--muted);}
+
+/* ═══════════════════════════════════
+   FINAL CTA
+═══════════════════════════════════ */
+.cta-sec{
+  background:var(--bg1);
+  text-align:center;
+  padding:8rem 2.5rem;
+  position:relative;overflow:hidden;
+}
+.cta-sec::before{
+  content:'';
+  position:absolute;
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(242,196,176,0.07) 0%,transparent 65%);
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.cta-inner{position:relative;z-index:1;}
+.cta-eyebrow{
+  font-size:0.65rem;font-weight:500;
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--blush);
+  margin-bottom:1.25rem;
+}
+.cta-h2{
+  font-family:var(--fd);
+  font-size:clamp(3rem,6vw,5.5rem);
+  font-weight:300;
+  letter-spacing:-0.02em;
+  line-height:0.95;
+  margin-bottom:1.5rem;
+}
+.cta-h2 em{font-style:italic;color:var(--blush);}
+.cta-sub{
+  font-size:1rem;color:var(--muted);
+  max-width:400px;margin:0 auto 2.5rem;
+  line-height:1.7;font-weight:300;
+}
+.cta-btns{
+  display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;
+}
+.cta-note{
+  margin-top:1.25rem;
+  font-size:0.72rem;color:var(--muted);
+}
+
+/* ═══════════════════════════════════
+   FOOTER
+═══════════════════════════════════ */
+.footer{
+  border-top:1px solid var(--border);
+  background:var(--bg);
+  padding:2.5rem 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:1rem;
+}
+.footer-brand{
+  font-family:var(--fd);
+  font-size:1.1rem;font-weight:600;color:var(--cream);
+}
+.footer-brand span{color:var(--blush);}
+.footer-links{display:flex;gap:2rem;}
+.fl{font-size:0.72rem;color:var(--muted);transition:color 0.2s;}
+.fl:hover{color:var(--cream);}
+.footer-note{
+  font-size:0.65rem;color:var(--faint);
+  width:100%;margin-top:0.5rem;
+}
+
+/* ═══════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════ */
+.reveal{
+  opacity:0;
+  transform:translateY(24px);
+  transition:opacity 0.7s var(--ease),transform 0.7s var(--ease);
+}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ═══════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════ */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;text-align:center;}
+  .hero-sub{max-width:100%;}
+  .hero-btns{justify-content:center;}
+  .hero-proof{justify-content:center;}
+  .phone-wrap{margin-top:2rem;}
+  .how-grid{grid-template-columns:1fr;}
+  .feat-brick,.feat-brick.flip{grid-template-columns:1fr;}
+  .feat-brick.flip .feat-visual{order:unset;}
+  .feat-brick.flip .feat-copy{order:unset;}
+  .testi-grid{grid-template-columns:1fr;}
+  .price-grid{grid-template-columns:1fr;}
+}
+@media(max-width:600px){
+  .nav-links{display:none;}
+  .hero{padding:6rem 1.25rem 4rem;}
+  .wrap{padding:0 1.25rem;}
+  .sec{padding:4rem 0;}
+  .how-card,.feat-copy,.testi,.price-card{padding:1.75rem 1.25rem;}
+  .cta-sec{padding:5rem 1.25rem;}
+  .footer{padding:2rem 1.25rem;flex-direction:column;align-items:flex-start;}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:0.01ms!important;animation-duration:0.01ms!important;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">Spot<span>Style</span></div>
+  <div class="nav-links">
+    <a href="#how">How it works</a>
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+  </div>
+  <button class="nav-cta" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Get the App</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-tag">
+        <div class="hero-tag-dot"></div>
+        Now Available — iOS &amp; Android
+      </div>
+
+      <h1 class="hero-h1">
+        <span class="block">See it.</span>
+        <span class="block"><em>Find it.</em></span>
+        <span class="block">Own it.</span>
+      </h1>
+
+      <p class="hero-sub">
+        You see an incredible outfit — on the street, in a show, on your screen. 
+        One photo. <strong>Every piece identified.</strong> Every item shoppable in seconds.
+        SpotStyle is the app fashion people have been waiting for.
+      </p>
+
+      <div class="hero-btns">
+        <button class="btn-main">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          Download Free
+        </button>
+        <a class="btn-ghost" href="#how">See how it works →</a>
+      </div>
+
+      <div class="hero-proof">
+        <div class="proof-stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <div class="proof-text"><strong>4.9</strong> from 2,400+ reviews</div>
+        <div class="proof-sep"></div>
+        <div class="proof-stat"><strong>180k+</strong> outfits spotted</div>
+        <div class="proof-sep"></div>
+        <div class="proof-stat"><strong>$2.1M</strong> saved vs retail</div>
+      </div>
+    </div>
+
+    <!-- PHONE DEMO -->
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="app-topbar">
+            <span class="app-name">SpotStyle</span>
+            <div class="app-icon">✦</div>
+          </div>
+
+          <div class="viewfinder">
+            <div class="vf-corner vf-tl"></div>
+            <div class="vf-corner vf-tr"></div>
+            <div class="vf-corner vf-bl"></div>
+            <div class="vf-corner vf-br"></div>
+            <div class="vf-figure">
+              <div class="vf-head"></div>
+              <div class="vf-body"></div>
+              <div class="vf-legs">
+                <div class="vf-leg"></div>
+                <div class="vf-leg"></div>
+              </div>
+            </div>
+            <div class="vf-scan"></div>
+            <div class="vf-tag vf-tag-1">Jacket</div>
+            <div class="vf-tag vf-tag-2">Denim</div>
+            <div class="vf-tag vf-tag-3">Sneakers</div>
+          </div>
+
+          <div class="app-results">
+            <div class="result-card rc1">
+              <div class="rc-swatch" style="background:linear-gradient(135deg,#2A2520,#3D3028);"></div>
+              <div class="rc-info">
+                <div class="rc-name">Leather Moto Jacket</div>
+                <div class="rc-brand">AllSaints · 3 options</div>
+              </div>
+              <div class="rc-price">$189</div>
+              <div class="rc-buy">Buy</div>
+            </div>
+            <div class="result-card rc2">
+              <div class="rc-swatch" style="background:linear-gradient(135deg,#1A2535,#243040);"></div>
+              <div class="rc-info">
+                <div class="rc-name">Slim Taper Jean</div>
+                <div class="rc-brand">Levi's · 5 options</div>
+              </div>
+              <div class="rc-price">$69</div>
+              <div class="rc-buy">Buy</div>
+            </div>
+            <div class="result-card rc3">
+              <div class="rc-swatch" style="background:linear-gradient(135deg,#F0EDE6,#D8D4CC);"></div>
+              <div class="rc-info">
+                <div class="rc-name">Air Force 1 '07</div>
+                <div class="rc-brand">Nike · 8 options</div>
+              </div>
+              <div class="rc-price">$110</div>
+              <div class="rc-buy">Buy</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-inner">
+    <span class="tick"><span class="tick-star">★★★★★</span>&nbsp;<strong>"Found the exact jacket from that Netflix show in 8 seconds."</strong>&nbsp;— @miafashion</span>
+    <span class="tick"><span class="tick-star">★★★★★</span>&nbsp;<strong>"I saved $340 finding budget alternatives. Obsessed."</strong>&nbsp;— @stylebykezia</span>
+    <span class="tick"><span class="tick-star">★★★★★</span>&nbsp;<strong>"Literally replaced Google Lens for fashion completely."</strong>&nbsp;— @threadcount_</span>
+    <span class="tick"><span class="tick-star">★★★★★</span>&nbsp;<strong>"Spotted a stranger's coat in Seoul. Bought it in 30 seconds."</strong>&nbsp;— @wandrobe</span>
+    <span class="tick"><span class="tick-star">★★★★★</span>&nbsp;<strong>"The style rating feature changed how I think about outfits."</strong>&nbsp;— @devincurated</span>
+    <span class="tick"><span class="tick-star">★★★★★</span>&nbsp;<strong>"Found the exact jacket from that Netflix show in 8 seconds."</strong>&nbsp;— @miafashion</span>
+    <span class="tick"><span class="tick-star">★★★★★</span>&nbsp;<strong>"I saved $340 finding budget alternatives. Obsessed."</strong>&nbsp;— @stylebykezia</span>
+    <span class="tick"><span class="tick-star">★★★★★</span>&nbsp;<strong>"Literally replaced Google Lens for fashion completely."</strong>&nbsp;— @threadcount_</span>
+    <span class="tick"><span class="tick-star">★★★★★</span>&nbsp;<strong>"Spotted a stranger's coat in Seoul. Bought it in 30 seconds."</strong>&nbsp;— @wandrobe</span>
+    <span class="tick"><span class="tick-star">★★★★★</span>&nbsp;<strong>"The style rating feature changed how I think about outfits."</strong>&nbsp;— @devincurated</span>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how-sec" id="how">
+  <div class="wrap sec">
+    <div class="reveal">
+      <div class="sec-eyebrow">How It Works</div>
+      <h2 class="sec-h2">Three steps.<br><em>Infinite outfits.</em></h2>
+    </div>
+    <div class="how-grid">
+      <div class="how-card reveal">
+        <div class="how-num">1</div>
+        <span class="how-icon">📸</span>
+        <div class="how-title">Snap Anything</div>
+        <p class="how-desc">Point at any outfit — on the street, in a show, in a screenshot from anywhere. SpotStyle's AI identifies <strong>every individual piece</strong> separately in seconds.</p>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-num">2</div>
+        <span class="how-icon">✦</span>
+        <div class="how-title">Find Every Piece</div>
+        <p class="how-desc">Exact matches, budget alternatives at 3 price points, and a style breakdown explaining <strong>why the outfit actually works</strong>. You learn, not just copy.</p>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-num">3</div>
+        <span class="how-icon">🛒</span>
+        <div class="how-title">Buy in One Tap</div>
+        <p class="how-desc">Multiple retailers side by side, cashback surfaced automatically, saved to your Spotted Feed. Share the full look to friends as <strong>one shoppable link</strong>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="feat-sec" id="features">
+  <div class="wrap sec">
+    <div class="reveal">
+      <div class="sec-eyebrow">Features</div>
+      <h2 class="sec-h2">Not a search tool.<br><em>A style companion.</em></h2>
+      <p class="sec-sub">Every existing app stops at "here's the item." SpotStyle tells you the price, the why, the alternatives, and shares it — all in one place.</p>
+    </div>
+  </div>
+
+  <div class="wrap" style="padding-bottom:0;">
+
+    <div class="feat-brick reveal">
+      <div class="feat-copy">
+        <div class="feat-tag">Feature 01</div>
+        <div class="feat-title">Snap &amp; Identify — Every Piece, Not Just the Vibe</div>
+        <p class="feat-body">Point your camera at anyone wearing anything. SpotStyle breaks the outfit into <strong>individual identified items</strong> — jacket, shoes, bag, jeans, accessories — with actual product matches, not just aesthetic lookalikes.</p>
+        <div class="feat-detail">
+          <div class="fd-item">Works on real-world photos &amp; screenshots</div>
+          <div class="fd-item">TikTok, Instagram, Netflix — drag in from anywhere</div>
+          <div class="fd-item">Item-by-item breakdown, not outfit-level guesses</div>
+        </div>
+      </div>
+      <div class="feat-visual">
+        <div class="vis-snap">
+          <div class="vis-snap-img"></div>
+          <div class="vis-snap-tags">
+            <span class="vs-tag">Jacket ✦</span>
+            <span class="vs-tag">Denim ✦</span>
+            <span class="vs-tag">Sneakers ✦</span>
+            <span class="vs-tag">Bag ✦</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feat-brick flip reveal">
+      <div class="feat-copy">
+        <div class="feat-tag">Feature 02</div>
+        <div class="feat-title">Any Budget. The Same Look.</div>
+        <p class="feat-body">Can't afford the exact item? SpotStyle automatically finds <strong>lookalikes at luxury, mid-range, and budget price points</strong> — so the fit is never out of reach, no matter what you're working with.</p>
+        <div class="feat-detail">
+          <div class="fd-item">3-tier pricing for every identified piece</div>
+          <div class="fd-item">Cashback &amp; discount codes surfaced automatically</div>
+          <div class="fd-item">Filter by your budget in your Style Profile</div>
+        </div>
+      </div>
+      <div class="feat-visual">
+        <div class="vis-budget">
+          <div class="vb-row">
+            <span class="vb-tier vb-luxury">Luxury</span>
+            <span class="vb-price vb-luxury">$680</span>
+          </div>
+          <div class="vb-row">
+            <span class="vb-tier vb-mid">Mid-Range</span>
+            <span class="vb-price vb-mid">$189</span>
+          </div>
+          <div class="vb-row">
+            <span class="vb-tier vb-budget">Budget</span>
+            <span class="vb-price vb-budget">$42</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feat-brick reveal">
+      <div class="feat-copy">
+        <div class="feat-tag">Feature 03</div>
+        <div class="feat-title">Share a Spot — One Link, the Whole Look</div>
+        <p class="feat-body">Found an incredible outfit? Share the full breakdown — <strong>every piece, every price, every option</strong> — as one link. Friends can shop the exact same look directly from your share without even having the app.</p>
+        <div class="feat-detail">
+          <div class="fd-item">Full shoppable look in one shareable link</div>
+          <div class="fd-item">Spotted Feed — your personal mood board</div>
+          <div class="fd-item">Save by occasion, season, or vibe</div>
+        </div>
+      </div>
+      <div class="feat-visual">
+        <div class="vis-share">
+          <div class="vs-card">
+            <div class="vs-card-title">Spotted Look · Seoul Street, June</div>
+            <div class="vs-items">
+              <div class="vs-item"><span>Moto Jacket</span><span>$189</span></div>
+              <div class="vs-item"><span>Slim Taper Jeans</span><span>$69</span></div>
+              <div class="vs-item"><span>Air Force 1</span><span>$110</span></div>
+              <div class="vs-item"><span>Canvas Tote</span><span>$34</span></div>
+            </div>
+            <a class="vs-link">Shop This Look →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div style="height:6rem;"></div>
+</section>
+
+<!-- COMPARISON -->
+<section class="cmp-sec">
+  <div class="wrap sec">
+    <div class="reveal">
+      <div class="sec-eyebrow">vs. The Competition</div>
+      <h2 class="sec-h2">The others are<br><em>search bars.</em></h2>
+      <p class="sec-sub">Google Lens, Screenshop, Shop the Look — they tell you what something is. SpotStyle tells you what to do with that information.</p>
+    </div>
+    <div class="cmp-wrap reveal">
+      <table class="cmp-table">
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>Google Lens</th>
+            <th>Screenshop</th>
+            <th>Shop the Look</th>
+            <th>SpotStyle ✦</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Street photo identification</td><td class="ck">✓</td><td class="ck">✓</td><td class="ck">✓</td><td class="ck">✓</td></tr>
+          <tr><td>Budget alternatives (3 tiers)</td><td class="nx">✗</td><td class="nx">✗</td><td class="pt">Partial</td><td class="ck">✓</td></tr>
+          <tr><td>Personalised style profile</td><td class="nx">✗</td><td class="nx">✗</td><td class="nx">✗</td><td class="ck">✓</td></tr>
+          <tr><td>Style rating — explains the why</td><td class="nx">✗</td><td class="nx">✗</td><td class="nx">✗</td><td class="ck">✓</td></tr>
+          <tr><td>Shareable look links</td><td class="nx">✗</td><td class="nx">✗</td><td class="nx">✗</td><td class="ck">✓</td></tr>
+          <tr><td>Screenshot import from any app</td><td class="pt">Partial</td><td class="ck">✓</td><td class="nx">✗</td><td class="ck">✓</td></tr>
+          <tr><td>Cashback built in</td><td class="nx">✗</td><td class="nx">✗</td><td class="ck">✓</td><td class="ck">✓</td></tr>
+          <tr><td>Personal spotted feed / mood board</td><td class="nx">✗</td><td class="nx">✗</td><td class="nx">✗</td><td class="ck">✓</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-sec">
+  <div class="wrap sec">
+    <div class="reveal">
+      <div class="sec-eyebrow">Real People</div>
+      <h2 class="sec-h2">They spotted it.<br><em>Then bought it.</em></h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi reveal">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-text">"I photographed a woman's coat outside a café in Paris. SpotStyle found the exact Totême piece and two alternatives under $100. I bought one on the train home."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">MK</div>
+          <div>
+            <div class="testi-name">Mia K.</div>
+            <div class="testi-handle">@miafashionweek · 84k followers</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi reveal">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-text">"The style rating blew my mind. It didn't just find the outfit — it explained the colour blocking logic. I've genuinely learned more about dressing in 2 weeks than 2 years of Pinterest."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">DC</div>
+          <div>
+            <div class="testi-name">Devin C.</div>
+            <div class="testi-handle">@devincurated · 42k followers</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi reveal">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-text">"Sent my friend a SpotStyle share link for a whole look I saw in Seoul. She bought three of the pieces without even downloading the app. That share feature is genuinely genius."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">JL</div>
+          <div>
+            <div class="testi-name">Jade L.</div>
+            <div class="testi-handle">@threadcount_ · 127k followers</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="price-sec" id="pricing">
+  <div class="wrap sec">
+    <div class="reveal">
+      <div class="sec-eyebrow">Pricing</div>
+      <h2 class="sec-h2">Start free.<br><em>Go deeper.</em></h2>
+      <p class="sec-sub">The core snap-and-shop experience is free forever. Pro unlocks the companion layer that makes SpotStyle irreplaceable.</p>
+    </div>
+    <div class="price-grid reveal">
+      <div class="price-card">
+        <div class="price-label">Free Forever</div>
+        <div class="price-name">Explore</div>
+        <div class="price-amount">$<span>/mo</span></div>
+        <p class="price-desc">Everything you need to start spotting outfits and shopping them immediately.</p>
+        <ul class="price-features">
+          <li class="active">Snap &amp; Identify — unlimited</li>
+          <li class="active">One-tap shop across 50+ retailers</li>
+          <li class="active">Budget alternatives (3 tiers)</li>
+          <li class="active">Screenshot import from any app</li>
+          <li>Style Profile &amp; personalisation</li>
+          <li>Spotted Feed mood board</li>
+          <li>Shareable look links</li>
+          <li>Style rating explanations</li>
+        </ul>
+        <a class="price-btn price-btn-ghost">Download Free</a>
+      </div>
+      <div class="price-card featured">
+        <div class="featured-badge">Most Popular</div>
+        <div class="price-label">Full Companion</div>
+        <div class="price-name">Pro</div>
+        <div class="price-amount"><sup>$</sup>4.99<span>/mo</span></div>
+        <p class="price-desc">The full SpotStyle experience — personalised, shareable, and built around your style.</p>
+        <ul class="price-features">
+          <li class="active">Everything in Explore</li>
+          <li class="active">Style Profile &amp; body-type filter</li>
+          <li class="active">Spotted Feed — unlimited saves</li>
+          <li class="active">Shareable look links</li>
+          <li class="active">Style rating — full breakdowns</li>
+          <li class="active">Cashback &amp; deal alerts</li>
+          <li class="active">Occasion &amp; season organiser</li>
+          <li class="active">Priority new feature access</li>
+        </ul>
+        <a class="price-btn price-btn-solid">Start Pro Free — 14 Days</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-sec">
+  <div class="cta-inner">
+    <div class="cta-eyebrow">You've seen the outfit. Now find it.</div>
+    <h2 class="cta-h2">Stop screenshotting.<br><em>Start owning.</em></h2>
+    <p class="cta-sub">180,000 outfits spotted. $2.1 million saved vs. retail. The fashion app that actually does what you've always wished Google Lens could.</p>
+    <div class="cta-btns">
+      <button class="btn-main">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download on iOS
+      </button>
+      <button class="btn-main" style="background:var(--bg2);color:var(--cream);box-shadow:none;border:1px solid var(--border);">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M3.18 23.76c.3.17.64.24.99.2l12.43-12.43L13.17 8.1 3.18 23.76zm17.65-10.85L17.95 11l-3.22 3.22 3.22 3.22 2.91-1.63c.83-.46.83-1.64-.03-2.1zM3.54.28C3.22.1 2.85.05 2.52.18L14.91 12.57 11.6 15.88 3.54.28zm10.26 13.07L2.52 24.82c.33.13.7.08 1.02-.1l10.26-5.73-3.22-3.22 3.22-3.22z"/></svg>
+        Get on Android
+      </button>
+    </div>
+    <div class="cta-note">Free to download · No credit card required · Pro trial included</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-brand">Spot<span>Style</span></div>
+  <div class="footer-links">
+    <a class="fl" href="#">Privacy</a>
+    <a class="fl" href="#">Terms</a>
+    <a class="fl" href="#">Contact</a>
+    <a class="fl" href="#">Press</a>
+  </div>
+  <div class="footer-note">© 2026 SpotStyle. See it. Find it. Own it.</div>
+</footer>
+
+<script>
+// Scroll reveal
+const revEls = document.querySelectorAll('.reveal');
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      // Stagger siblings
+      const siblings = [...e.target.parentElement.querySelectorAll('.reveal')];
+      const idx = siblings.indexOf(e.target);
+      setTimeout(() => {
+        e.target.classList.add('visible');
+      }, idx * 80);
+      revObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+revEls.forEach(el => revObs.observe(el));
+</script>
+</body>
+</html>
