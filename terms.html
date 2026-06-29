@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SpotStyle — Terms of Service & Privacy Policy</title>
+  <meta name="description" content="Terms of Service and Privacy Policy for SpotStyle, including data storage for faces, body types, and AI image processing." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --coral: #E8505B; --coral-light: #FFF1EE; --peach: #FF8A6B;
+      --amber: #F59E0B; --amber-light: #FEF3C7;
+      --cream: #FFFBF7; --warm-gray: #F8F6F3;
+      --charcoal: #1A1A2E; --text-secondary: #6B6560; --text-muted: #9E9892;
+      --border: #F0EDE8;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--cream); color: var(--charcoal); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { border: none; background: none; cursor: pointer; font-family: inherit; }
+    svg { display: inline-block; vertical-align: middle; flex-shrink: 0; }
+
+    .text-gradient { background: linear-gradient(135deg,#E8505B 0%,#FF8A6B 50%,#F59E0B 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .glass { background: rgba(255,255,255,0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.35); }
+    .bg-mesh { background: radial-gradient(at 20% 20%, rgba(232,80,91,.08) 0%,transparent 50%), radial-gradient(at 80% 80%, rgba(245,158,11,.06) 0%,transparent 50%); }
+    ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: var(--warm-gray); } ::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 3px; }
+    ::selection { background: rgba(232,80,91,.2); }
+
+    .reveal { opacity:0; transform:translateY(36px); transition:opacity .7s ease,transform .7s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .delay-1 { transition-delay:.1s; } .delay-2 { transition-delay:.2s; } .delay-3 { transition-delay:.3s; } .delay-4 { transition-delay:.4s; }
+
+    .container { max-width:1200px; margin:0 auto; padding:0 1.5rem; }
+    .container-sm { max-width:960px; margin:0 auto; padding:0 1.5rem; }
+    .container-xs { max-width:720px; margin:0 auto; padding:0 1.5rem; }
+
+    /* NAV */
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(255,251,247,.88); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); padding:.9rem 1.5rem; }
+    .nav-inner { max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; }
+    .nav-logo { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; }
+    .nav-logo span { color:var(--coral); }
+    .nav-cta { padding:.55rem 1.4rem; border-radius:999px; font-weight:600; font-size:.875rem; color:white; background:linear-gradient(135deg,#E8505B,#FF8A6B,#F59E0B); transition:transform .2s,box-shadow .2s; }
+    .nav-cta:hover { transform:scale(1.04); box-shadow:0 8px 24px rgba(232,80,91,.28); }
+
+    /* HEADER */
+    #terms-header { padding:9rem 0 4rem; text-align:center; position:relative; overflow:hidden; }
+    .hero-badge { display:inline-flex; align-items:center; gap:.4rem; padding:.4rem 1rem; border-radius:999px; font-size:.82rem; font-weight:500; background:rgba(232,80,91,.1); color:var(--coral); border:1px solid rgba(232,80,91,.2); margin-bottom:1.5rem; }
+    h1 { font-family:'Playfair Display',serif; font-size:clamp(2.2rem,4vw,3.8rem); font-weight:700; line-height:1.1; letter-spacing:-.02em; margin-bottom:1.2rem; }
+    .section-sub { font-size:1.05rem; line-height:1.7; color:var(--text-secondary); max-width:38rem; margin:0 auto; }
+    
+    /* LEGAL CONTENT */
+    #legal-content { padding: 2rem 0 5rem; }
+    .legal-block { margin-bottom: 3rem; }
+    .legal-block h2 { font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:700; margin-bottom:1rem; color:var(--charcoal); }
+    .legal-block h3 { font-size:1.1rem; font-weight:600; margin-top:1.5rem; margin-bottom:.6rem; color:var(--coral); }
+    .legal-block p, .legal-block li { font-size:.95rem; color:var(--text-secondary); line-height:1.8; margin-bottom:.8rem; }
+    .legal-block ul { padding-left: 1.5rem; margin-bottom: 1rem; }
+    .legal-block li::marker { color: var(--coral); }
+    .legal-card { background: white; border: 1px solid var(--border); border-radius: 1.2rem; padding: 2.5rem; box-shadow: 0 4px 20px rgba(0,0,0,.03); }
+    .highlight-box { background: var(--coral-light); border-left: 4px solid var(--coral); padding: 1.2rem 1.5rem; border-radius: .5rem; margin: 1.5rem 0; }
+    .highlight-box p { color: var(--charcoal); font-weight: 500; margin: 0; }
+
+    /* PRICING */
+    #pricing { padding: 5rem 0; background: var(--warm-gray); }
+    .section-header { text-align:center; margin-bottom:3.5rem; }
+    .section-label { font-size:.72rem; font-weight:600; text-transform:uppercase; letter-spacing:.12em; color:var(--coral); margin-bottom:.9rem; }
+    .section-h2 { font-family:'Playfair Display',serif; font-size:clamp(1.7rem,3vw,2.8rem); font-weight:700; line-height:1.15; margin-bottom:.9rem; }
+    .pricing-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; max-width:800px; margin:0 auto; }
+    .price-card { background:white; border-radius:1.5rem; padding:2rem; border:1px solid transparent; transition:all .3s; position:relative; }
+    .price-card:hover { transform:translateY(-4px); box-shadow:0 16px 40px rgba(0,0,0,.08); }
+    .price-card.pro { border-color:var(--coral); box-shadow:0 10px 30px rgba(232,80,91,.1); }
+    .price-tag { font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:700; color:var(--charcoal); margin:.5rem 0; }
+    .price-tag span { font-size:1rem; font-weight:400; color:var(--text-muted); }
+    .price-name { font-size:1.2rem; font-weight:700; color:var(--coral); text-transform:uppercase; letter-spacing:.05em; }
+    .price-desc { font-size:.9rem; color:var(--text-secondary); margin-bottom:1.5rem; }
+    .price-list { list-style:none; margin-bottom:1.5rem; }
+    .price-list li { display:flex; align-items:center; gap:.6rem; font-size:.9rem; color:var(--charcoal); margin-bottom:.7rem; }
+    .price-list svg { width:1.1rem; height:1.1rem; color:#059669; flex-shrink:0; }
+    .btn-price { display:block; width:100%; padding:.9rem; border-radius:.8rem; font-weight:600; text-align:center; transition:transform .2s; }
+    .btn-price:hover { transform:scale(1.02); }
+    .btn-free { background:var(--warm-gray); color:var(--charcoal); border:1px solid var(--border); }
+    .btn-pro { background:linear-gradient(135deg,#E8505B,#FF8A6B,#F59E0B); color:white; box-shadow:0 8px 20px rgba(232,80,91,.25); }
+    .badge-pop { position:absolute; top:-.8rem; right:1.5rem; background:var(--coral); color:white; font-size:.7rem; font-weight:600; padding:.3rem .8rem; border-radius:999px; text-transform:uppercase; letter-spacing:.05em; }
+
+    /* ROADMAP */
+    #roadmap { padding: 5rem 0; background: white; }
+    .phase-item { display:flex; gap:2rem; margin-bottom:2.5rem; align-items:flex-start; }
+    .phase-num { font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:700; color:var(--coral); opacity:.3; min-width:60px; line-height:1; }
+    .phase-content { background:var(--warm-gray); border-radius:1.2rem; padding:1.8rem; flex:1; border-left:4px solid var(--coral); }
+    .phase-content h3 { font-family:'Playfair Display',serif; font-size:1.4rem; margin-bottom:.3rem; }
+    .phase-content .sub { color:var(--coral); font-weight:600; font-size:.85rem; margin-bottom:.8rem; }
+    .phase-content p { font-size:.92rem; color:var(--text-secondary); line-height:1.7; }
+    .api-tag { display:inline-block; background:var(--amber-light); color:var(--amber); font-size:.75rem; font-weight:600; padding:.2rem .6rem; border-radius:.4rem; margin-top:.8rem; margin-right:.3rem; }
+
+    /* FOOTER */
+    footer { background:var(--charcoal); color:rgba(255,255,255,.6); padding:2.5rem 0; }
+    .footer-inner { max-width:1200px; margin:0 auto; padding:0 1.5rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1.25rem; }
+    .footer-logo { font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:700; color:white; }
+    .footer-logo span { color:var(--coral); }
+    .footer-links { display:flex; gap:1.25rem; font-size:.84rem; }
+    .footer-links a:hover { color:white; }
+    .footer-copy { font-size:.72rem; color:rgba(255,255,255,.3); }
+
+    @media(max-width:768px) {
+      .pricing-grid { grid-template-columns:1fr; }
+      .legal-card { padding: 1.5rem; }
+      .phase-item { flex-direction: column; gap: .5rem; }
+      .phase-num { min-width: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Spot<span>Style</span></a>
+    <a href="index.html" class="nav-cta">Back to App</a>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<section id="terms-header" class="bg-mesh">
+  <div class="container-sm">
+    <div class="hero-badge">Last Updated: June 2024</div>
+    <h1>Terms of Service &amp; <span class="text-gradient">Privacy Policy</span></h1>
+    <p class="section-sub">Your privacy is our priority. This document outlines how we handle your data, images, and personal information to provide you with the best AI-powered fashion experience.</p>
+  </div>
+</section>
+
+<!-- LEGAL CONTENT -->
+<section id="legal-content">
+  <div class="container-sm">
+    <div class="legal-card reveal">
+      
+      <div class="legal-block">
+        <h2>1. Acceptance of Terms</h2>
+        <p>By downloading, accessing, or using the SpotStyle mobile application ("Service"), you agree to be bound by these Terms of Service and Privacy Policy. If you do not agree with any part of these terms, please do not use the Service.</p>
+      </div>
+
+      <div class="legal-block">
+        <h2>2. User Data, Image Storage & Biometric Consent</h2>
+        <div class="highlight-box">
+          <p>⚠️ Explicit Consent for Image & Body Data Storage: By uploading photos to SpotStyle, you explicitly grant us permission to store and process images containing faces, body types, and clothing information on our secure cloud servers.</p>
+        </div>
+        <p>To provide our AI analysis and outfit identification features, we collect and store the following data:</p>
+        <ul>
+          <li><strong>Uploaded Images:</strong> Photographs or screenshots containing outfits, which may include your face, body type, and physical features.</li>
+          <li><strong>AI-Extracted Data:</strong> Bounding boxes, item tags (e.g., "jacket", "shoes"), and style ratings generated by our AI.</li>
+          <li><strong>Account Info:</strong> Username, email, and style preferences.</li>
+        </ul>
+        <h3>How We Use This Data</h3>
+        <p>Your images and body type data are used exclusively to:</p>
+        <ul>
+          <li>Identify clothing items using Google Cloud Vision API.</li>
+          <li>Provide personalized outfit recommendations and style ratings.</li>
+          <li>Match your body type to clothing for better fit recommendations.</li>
+          <li>Display outfits in your personal "Spotted Feed" mood board.</li>
+        </ul>
+        <h3>Data Storage & Security</h3>
+        <p>Your data is securely stored in our Supabase backend database. We implement industry-standard security measures to protect your personal information and images from unauthorized access. You have the right to request deletion of your account and all associated data at any time by contacting support.</p>
+      </div>
+
+      <div class="legal-block">
+        <h2>3. AI Processing & Third-Party APIs</h2>
+        <p>SpotStyle relies on third-party services to process images and fetch product data. By using our app, you acknowledge that your uploaded images and extracted data are processed by the following services:</p>
+        <ul>
+          <li><strong>Google Cloud Vision API:</strong> Used to scan uploaded images, draw bounding boxes around clothing items, and tag pieces. (Free tier: 1,000 image scans/month).</li>
+          <li><strong>Affiliate APIs (Amazon Associates, AWIN, ShareASale):</strong> Used to fetch real product data, prices, and affiliate links based on the AI tags extracted from your images.</li>
+        </ul>
+        <p>We do not sell your image data or body type information to third parties. Data shared with APIs is strictly for the purpose of generating your fashion results.</p>
+      </div>
+
+      <div class="legal-block">
+        <h2>4. Subscriptions & Billing (Pro Tier)</h2>
+        <p>SpotStyle offers a "Full Companion Pro" subscription for $4.99/month, processed securely via Stripe. By subscribing, you agree to the following:</p>
+        <ul>
+          <li>Billing occurs monthly until cancellation.</li>
+          <li>A 14-day free trial may be offered; standard billing begins after the trial ends.</li>
+          <li>You can cancel your subscription at any time directly in your app store settings.</li>
+          <li>Pro features (Style Rating, unlimited saves, Share a Spot) will be locked upon cancellation.</li>
+        </ul>
+      </div>
+
+      <div class="legal-block">
+        <h2>5. Affiliate Disclosure</h2>
+        <p>SpotStyle participates in affiliate programs with Amazon Associates, AWIN, and ShareASale. When you click an affiliate link in our app and make a purchase, we may earn a commission at no additional cost to you. This does not influence which products we display, as our AI matches are based purely on visual similarity and your budget preferences.</p>
+      </div>
+
+      <div class="legal-block">
+        <h2>6. Limitation of Liability</h2>
+        <p>SpotStyle provides fashion identification and shopping suggestions for entertainment and convenience purposes only. We do not guarantee the accuracy of AI identifications, the availability of products, or the sizing/fit of recommended items. We are not liable for any purchases made through third-party retailers.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRICING SECTION -->
+<section id="pricing" class="bg-mesh">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">Subscription Details</p>
+      <h2 class="section-h2">Simple, Transparent <span class="text-gradient">Pricing</span></h2>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card reveal delay-1">
+        <div class="price-name">Explore</div>
+        <div class="price-tag">Free<span>/mo</span></div>
+        <p class="price-desc">Everything you need to start spotting outfits and shopping them immediately.</p>
+        <ul class="price-list">
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Snap & Identify — unlimited</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> One-tap shop across 50+ retailers</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Budget alternatives (3 tiers)</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Screenshot import from any app</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Style Profile & personalisation</li>
+        </ul>
+        <div class="btn-price btn-free">Download Free</div>
+      </div>
+      <div class="price-card pro reveal delay-2">
+        <div class="badge-pop">Most Popular</div>
+        <div class="price-name" style="color:var(--charcoal)">Full Companion Pro</div>
+        <div class="price-tag">$4.99<span>/mo</span></div>
+        <p class="price-desc">The full SpotStyle experience — personalised, shareable, and built around your style.</p>
+        <ul class="price-list">
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Everything in Explore</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Style Profile & body-type filter</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Spotted Feed — unlimited saves</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Shareable look links</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Style rating — full breakdowns</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Cashback & deal alerts</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Occasion & season organiser</li>
+          <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Priority new feature access</li>
+        </ul>
+        <div class="btn-price btn-pro">Start Pro Free — 14 Days</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP SECTION -->
+<section id="roadmap">
+  <div class="container-sm">
+    <div class="section-header reveal">
+      <p class="section-label">Our Roadmap</p>
+      <h2 class="section-h2">The SpotStyle <span class="text-gradient">Build Plan</span></h2>
+      <p class="section-sub">Here is exactly how we are bringing this to life step-by-step to ensure a seamless AI-powered fashion experience.</p>
+    </div>
+
+    <div class="phase-item reveal delay-1">
+      <div class="phase-num">01</div>
+      <div class="phase-content">
+        <h3>The Brain (Supabase Backend)</h3>
+        <p class="sub">Where we are today.</p>
+        <p>We set up a free database to store users, uploaded outfits, AI tags, and shopping links. This builds the "memory" of SpotStyle—a secure place in the cloud to catch photos, remember who uploaded them, and store the shopping links attached to them.</p>
+      </div>
+    </div>
+
+    <div class="phase-item reveal delay-2">
+      <div class="phase-num">02</div>
+      <div class="phase-content">
+        <h3>The Body (React Native & Expo Frontend)</h3>
+        <p class="sub">The mobile app shell.</p>
+        <p>We build the mobile app shell implementing the dark luxury theme (near-black background, blush pink accents, Cormorant Garamond fonts) and build the camera/photo upload screen so users can start snapping their outfits.</p>
+      </div>
+    </div>
+
+    <div class="phase-item reveal delay-3">
+      <div class="phase-num">03</div>
+      <div class="phase-content">
+        <h3>The Eyes (Google Cloud Vision API)</h3>
+        <p class="sub">Connecting to Google’s AI.</p>
+        <p>When a user uploads a photo, the AI will scan it, draw bounding boxes around the jacket, shoes, and bag, and send those tags back to your database.</p>
+        <div class="api-tag">Free: 1,000 scans/mo</div>
+        <div class="api-tag">Scalable: ~$1.50 per 2,000 scans</div>
+      </div>
+    </div>
+
+    <div class="phase-item reveal delay-4">
+      <div class="phase-num">04</div>
+      <div class="phase-content">
+        <h3>The Wallet (Affiliate APIs)</h3>
+        <p class="sub">Monetization & matching.</p>
+        <p>We take those AI tags and ping Amazon Associates and AWIN to fetch real products, prices, and your affiliate links to display in the app. It is completely free to sign up as a "publisher." They pay you a commission when users buy.</p>
+        <div class="api-tag">Amazon Associates</div>
+        <div class="api-tag">AWIN</div>
+        <div class="api-tag">ShareASale</div>
+      </div>
+    </div>
+
+    <div class="phase-item reveal delay-4">
+      <div class="phase-num">05</div>
+      <div class="phase-content">
+        <h3>The Polish (Pro Features & Launch)</h3>
+        <p class="sub">Monetization & App Store.</p>
+        <p>We lock the "Style Rating" and "Share a Spot" features behind the $4.99/month Pro paywall using Stripe, and prepare the app for the App Store launch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Spot<span>Style</span></div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="terms.html">Terms</a>
+      <a href="#">Privacy</a>
+      <a href="#">Support</a>
+    </div>
+    <div class="footer-copy">&copy; 2025 SpotStyle. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1, rootMargin: '-50px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Hero reveals on load
+  window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      document.querySelectorAll('#terms-header .reveal, #legal-content .reveal').forEach(el => el.classList.add('visible'));
+    }, 150);
+  });
+</script>
+</body>
+</html>
